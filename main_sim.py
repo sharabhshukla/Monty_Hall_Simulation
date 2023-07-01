@@ -2,7 +2,7 @@ from random import choice
 from loguru import logger
 from src.sim.monty_hall_sim import Strategy, Door, MHSim
 
-n_trials = 1_000_000
+n_trials = 2_000_000
 
 
 logger.info("Running monty hall simulation!!")
