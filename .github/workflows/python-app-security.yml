@@ -20,5 +20,10 @@ jobs:
     name: Execute the pycharm-security action
     steps:
       - uses: actions/checkout@v1
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install flake8 pytest
+          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
       - name: Run PyCharm Security
         uses: tonybaloney/pycharm-security@master
