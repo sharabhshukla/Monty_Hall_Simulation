@@ -1,6 +1,5 @@
 import random
 from enum import Enum, auto
-from loguru import logger
 
 
 class Door(Enum):
@@ -11,47 +10,63 @@ class Door(Enum):
 
 class Strategy(Enum):
     FLIP = auto()
-    NO_FLIP = auto()
+    STAY = auto()
+
+
+class Outcome(Enum):
+    WIN = True
+    LOSS = False
 
 
 class MHSim:
     """
-    This is a class that sets up a simulation for monty hall game
+    This class simulates a game of the Monty Hall problem.
+
+    Parameters:
+        prize_door (Door): The door concealing the prize.
+        strategy (Strategy): The strategy used by the player, either FLIP or STAY.
+
+    Attributes:
+        prize_door (Door): The door concealing the prize.
+        player_door (Door): The door initially chosen by the player.
+        strategy (Strategy): The strategy used by the player, either FLIP or STAY.
     """
-
     def __init__(self, prize_door: Door, strategy: Strategy):
-        """
-
-        :param prize_door: the door that has the car hidden behind it
-        :param strategy: Type of strategy to be used, to flip or not, when the door is revealed to the player
-        """
         self.prize_door = prize_door
         self.player_door = None
         self.strategy = strategy
 
     @staticmethod
-    def flip_choice(player_door):
+    def flip_choice(player_door: Door):
         """
-        A static method that flip the players choice
-        :param player_door: door choosen by the player
-        :return: the flipped choice for the door
+        Flips the player's choice of door.
+
+        :param player_door: The door chosen by the player.
+        :type player_door: Door
+        :return: The flipped choice for the door.
+        :rtype: Door
         """
         for door in random.sample(list(Door), len(list(Door))):
             if door != player_door:
                 return door
 
-    def simulate(self):
+    def simulate(self) -> Outcome:
         """
-        The method simulates the monty hall
-        :return: the outcome of the gams, True if won and False when lost
+        Simulates a game of the Monty Hall problem.
+
+        Returns:
+            Outcome: The outcome of the game, either Outcome.WIN or Outcome.LOSS.
+
+        Raises:
+            None
         """
         self.player_door = random.choice(list(Door))
         if self.player_door == self.prize_door:
-            return True
+            return Outcome.WIN.value
         self.player_door = MHSim.flip_choice(self.player_door) if self.strategy == Strategy.FLIP else self.player_door
         if self.player_door == self.prize_door:
-            return True
-        return False
+            return Outcome.WIN.value
+        return Outcome.LOSS.value
 
 
 if __name__ == '__main__':

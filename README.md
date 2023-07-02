@@ -1,6 +1,8 @@
 # Monty_Hall_Simulation
 Title: Monty Hall Simulation Code Repository
 
+<img src=".README_images/2bd5c902.png"/>
+
 Description: 
 The Monty Hall Simulation Code Repository is a comprehensive collection of code snippets and scripts designed to simulate the famous Monty Hall problem. This repository offers a practical resource for programmers, statisticians, and curious individuals to explore and experiment with different strategies related to the Monty Hall dilemma.
 
